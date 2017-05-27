@@ -34,7 +34,7 @@ public class MovieNet {
       for (int j = 0; j < actors.length; j++) {
 
         if (Arrays.asList(this.movielines.get(i)).contains(actors[j]) == false) {
-          continue;
+          break;
         } else {
           check += 1;
         }
