@@ -12,17 +12,24 @@ public class MovieNet {
 
   static final String KevinBacon = "Bacon, Kevin";
 
+  protected LinkedList<String[]> movielines;
+
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
   //	String[1..n-1] = list of actors
   public MovieNet(LinkedList<String[]> movielines) {
-    System.out.println(movielines.toString());
+    this.movielines = movielines;
+    System.out.println(movielines.get(0));
   }	// Constructor
 
 /*============================================================================*/
 
   // [Q1]
   public String[] moviesby(String[] actors) {
+    for (int i = 0; i < this.movielines.size(); i++) {
+      System.out.println(Arrays.toString(this.movielines.get(i)));
+    }
+
     String[] value = actors;
 
     String newValue = value[0];
