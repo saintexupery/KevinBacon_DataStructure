@@ -26,10 +26,9 @@ public class MovieNet {
 
   // [Q1]
   public String[] moviesby(String[] actors) {
-    String[] returnValue = new String[1];
+    String[] answer = new String[this.movielines.size()];
 
     for (int i = 0; i < this.movielines.size(); i++) {
-      String[] answer = new String[256];
       int check = 0;
 
       for (int j = 0; j < actors.length; j++) {
@@ -41,13 +40,17 @@ public class MovieNet {
         }
 
         if (j == actors.length - 1 && check == actors.length) {
-          System.out.println(this.movielines.get(i)[0]);
+          // System.out.println(this.movielines.get(i)[0]);
           answer[i] = this.movielines.get(i)[0];
         }
       }
     }
-
-    return returnValue;
+    if (answer[0] == null) {
+      System.out.println("hello");
+    } else {
+      return answer;
+    }
+    return null;
   }
 
   // // [Q2]
