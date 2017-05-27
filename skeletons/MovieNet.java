@@ -19,22 +19,35 @@ public class MovieNet {
   //	String[1..n-1] = list of actors
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
-    System.out.println(movielines.get(0));
+    // System.out.println(movielines.get(0));
   }	// Constructor
 
 /*============================================================================*/
 
   // [Q1]
   public String[] moviesby(String[] actors) {
+    String[] returnValue = new String[1];
+
     for (int i = 0; i < this.movielines.size(); i++) {
-      System.out.println(Arrays.toString(this.movielines.get(i)));
+      String[] answer = new String[256];
+      int check = 0;
+
+      for (int j = 0; j < actors.length; j++) {
+
+        if (Arrays.asList(this.movielines.get(i)).contains(actors[j]) == false) {
+          continue;
+        } else {
+          check += 1;
+        }
+
+        if (j == actors.length - 1 && check == actors.length) {
+          System.out.println(this.movielines.get(i)[0]);
+          answer[i] = this.movielines.get(i)[0];
+        }
+      }
     }
 
-    String[] value = actors;
-
-    String newValue = value[0];
-
-    return value;
+    return returnValue;
   }
 
   // // [Q2]
