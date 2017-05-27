@@ -15,13 +15,17 @@ public class MovieNet {
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
   //	String[1..n-1] = list of actors
-  public MovieNet(LinkedList<String[]> movielines) {}	// Constructor
+  public MovieNet(LinkedList<String[]> movielines) {
+    System.out.println(movielines.toString());
+  }	// Constructor
 
 /*============================================================================*/
 
   // [Q1]
   public String[] moviesby(String[] actors) {
     String[] value = actors;
+
+    String newValue = value[0];
 
     return value;
   }
