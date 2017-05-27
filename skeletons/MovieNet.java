@@ -47,9 +47,9 @@ public class MovieNet {
       }
     }
 
-    // 이 코드로 인해 유동적인 크기를 가진 ArrayList를 String Array로 변환해줌
+    // Convert ArrayList to StringArray with codes below;
     // http://hashcode.co.kr/questions/153/arrayliststring%EC%9D%84-string-array%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B2%95
-    // 위의 사이트 참고할것
+    // check above site;
     if (answerList.size() != 0) {
       String[] answerArr = new String[answerList.size()];
       answerArr = answerList.toArray(answerArr);
@@ -59,9 +59,9 @@ public class MovieNet {
     }
   }
 
-  // // [Q2]
-  // public String[] castin(String[] titles) { }
-  //
+  // [Q2]
+  public String[] castin(String[] titles) { }
+
   // // [Q3]
   // public String[] pairmost(String[] actors) { }
   //
