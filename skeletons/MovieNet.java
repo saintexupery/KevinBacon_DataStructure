@@ -20,33 +20,36 @@ public class MovieNet {
 /*============================================================================*/
 
   // [Q1]
-  public String[] moviesby(String[] actors) { }
+  public String[] moviesby(String[] actors) {
+    String[] value = actors;
 
-  // [Q2]
-  public String[] castin(String[] titles) { }
+    return value;
+  }
 
-  // [Q3]
-  public String[] pairmost(String[] actors) { }
-
-  // [Q4]
-  public int Bacon(String actor) { }
-
-  // [Q5]
-  public int distance(String src, String dst) { }
-
-  // [Q6]
-  public int npath(String src, String dst) { }
-
-  // [Q7]
-  public String[] apath(String src, String dst) { }
-
-  // [Q8]
-  public int eccentricity(String actor) { }
-
-  // [Q9]
-  public float closeness(String actor) { }
+  // // [Q2]
+  // public String[] castin(String[] titles) { }
+  //
+  // // [Q3]
+  // public String[] pairmost(String[] actors) { }
+  //
+  // // [Q4]
+  // public int Bacon(String actor) { }
+  //
+  // // [Q5]
+  // public int distance(String src, String dst) { }
+  //
+  // // [Q6]
+  // public int npath(String src, String dst) { }
+  //
+  // // [Q7]
+  // public String[] apath(String src, String dst) { }
+  //
+  // // [Q8]
+  // public int eccentricity(String actor) { }
+  //
+  // // [Q9]
+  // public float closeness(String actor) { }
 
 /*============================================================================*/
 
 }
-
