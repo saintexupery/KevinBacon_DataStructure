@@ -151,30 +151,23 @@ public class MovieNet {
     // regex instead of using contains;
     // HashMap<String[], Integer> map = new HashMap<String[], Integer>();
 
-    for (int i = 0; i < combinations.size(); i++) {
-      // Integer key = 0;
-
-      for (String[] movie : this.movielines) {
-        if (Arrays.asList(movie).contains(combinations.get(i)[0]) == true) {
-          // key += 1;
-          System.out.println("Yes!!");
-        }
-        // Pattern p = Pattern.compile(combinations.get(i));
-        // boolean found = false;
-        // for (String s : this.newMovielines.get(j)) {
-        //   if (p.matcher(s).find()) {
-        //     found = true;
-        //     break;
-        //   }
-        // }
-        // System.out.println(movie);
-      }
-    }
+//    for (int i = 0; i < combinations.size(); i++) {
+//      // Integer key = 0;
+//
+//      for (String[] movie : this.movielines) {
+//        if (Arrays.asList(movie).contains(combinations.get(i)[0]) == true && Arrays.asList(movie).contains(combinations.get(i)[1]) == true) {
+//          // key += 1;
+//          System.out.println("Yes!!");
+//        }
+//      }
+//    }
     return null;
   }
-  //
-  // // [Q4]
-  // public int Bacon(String actor) { }
+
+   // [Q4]
+   public int Bacon(String actor) {
+
+   }
   //
   // // [Q5]
   // public int distance(String src, String dst) { }

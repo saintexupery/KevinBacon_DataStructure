@@ -79,16 +79,16 @@ public class MainBacon {
 	// 		printStrings(opnd,"? ");
 	// 		printStrings(hollywood.castin(opnd),"\n");
 	// 	break;
-	case 3: System.out.print("Which pair cast in "+opnd[0]
-			+" costarred most often? ");
-			String[] actors = hollywood.castin(opnd);
-			if (actors==null) actors = new String[0];
-			printStrings(hollywood.pairmost(actors),"\n");
-		break;
+//	case 3: System.out.print("Which pair cast in "+opnd[0]
+//			+" costarred most often? ");
+//			String[] actors = hollywood.castin(opnd);
+//			if (actors==null) actors = new String[0];
+//			printStrings(hollywood.pairmost(actors),"\n");
+//		break;
   //
-	// case 4: System.out.println("Bacon number of "+opnd[0]+" : "
-	// 		+hollywood.Bacon(opnd[0]));
-	// 	break;
+	 case 4: System.out.println("Bacon number of "+opnd[0]+" : "
+	 		+hollywood.Bacon(opnd[0]));
+	 	break;
 	// case 5: System.out.println("Collaboration distance between "
 	// 		+opnd[0]+"/" +opnd[1]+" : "
 	// 		+hollywood.distance(opnd[0],opnd[1]));
