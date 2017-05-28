@@ -14,7 +14,7 @@ public class MovieNet {
 
   protected LinkedList<String[]> movielines;
   protected List<String[]> newMovielines;
-  // protected HashMap<String, ArrayList<String>> movieMap;
+  protected Hashtable<String, ArrayList<String>> movieTable;
 
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
@@ -22,22 +22,20 @@ public class MovieNet {
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
     this.newMovielines = new ArrayList<String[]>();
-    // this.movieMap = new HashMap<String, ArrayList<String>>();
+    this.movieTable = new Hashtable<String, ArrayList<String>>();
 
     // movielines is converted to ArrayList from String List;
     ListIterator<String[]> listIterator = this.movielines.listIterator();
     while (listIterator.hasNext()) {
       String[] current = listIterator.next();
-      newMovielines.add(current);
+      this.newMovielines.add(current);
 
-      // if (current.equals(this.movielines.get(0)) == false) {
-      //   ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
-      //   // System.out.println("class: " + current[0].getClass().getSimpleName());
-      //   // System.out.println("current value: " + current[0]);
-      //   movieMap.put(current[0], );
-      // } else {
-      //   continue;
-      // }
+       if (current.equals(this.movielines.get(0)) == false) {
+         ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
+         this.movieTable.put(current[0], currentList);
+       } else {
+         continue;
+       }
     }
 
     // System.out.println(movielines.get(0));
@@ -167,6 +165,7 @@ public class MovieNet {
    // [Q4]
    public int Bacon(String actor) {
 
+    return -1;
    }
   //
   // // [Q5]
