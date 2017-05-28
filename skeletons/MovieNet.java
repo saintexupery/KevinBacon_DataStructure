@@ -92,8 +92,12 @@ public class MovieNet {
       }
     }
 
-    
+    // add all actors from first movie to answerList;
+    for (int i = 1; i < movieList.get(0).length; i++) {
+      answerList.add(movieList.get(0)[i]);
+    }
 
+    System.out.println(answerList);
 
     return null;
   }
