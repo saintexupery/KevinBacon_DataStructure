@@ -121,8 +121,10 @@ public class MovieNet {
     }
   }
 
-  // // [Q3]
-  // public String[] pairmost(String[] actors) { }
+  // [Q3]
+  public String[] pairmost(String[] actors) {
+    System.out.println(actors);
+  }
   //
   // // [Q4]
   // public int Bacon(String actor) { }
