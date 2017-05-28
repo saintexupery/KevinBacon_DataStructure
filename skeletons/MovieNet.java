@@ -13,31 +13,90 @@ public class MovieNet {
   static final String KevinBacon = "Bacon, Kevin";
 
   protected LinkedList<String[]> movielines;
-  protected List<String[]> newMovielines;
-  protected Hashtable<String, ArrayList<String>> movieTable;
+//  protected List<String[]> newMovielines;
+//  protected Hashtable<String, ArrayList<String>> movieTable;
+
+  // With node;
   protected Map<String, List<ActorNode>> graph;
+  protected Set<String> keySet;
 
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
   //	String[1..n-1] = list of actors
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
-    this.newMovielines = new ArrayList<String[]>();
-    this.movieTable = new Hashtable<String, ArrayList<String>>();
+//    this.newMovielines = new ArrayList<String[]>();
+//    this.movieTable = new Hashtable<String, ArrayList<String>>();
 
-    // movielines is converted to ArrayList from String List;
+    //With node;
+    this.graph = new HashMap<String, List<ActorNode>>();
+    this.keySet = new HashSet<String>();
+
+    //set graph
     ListIterator<String[]> listIterator = this.movielines.listIterator();
     while (listIterator.hasNext()) {
       String[] current = listIterator.next();
-      this.newMovielines.add(current);
+      String currentTitle = current[0];
 
-       if (current.equals(this.movielines.get(0)) == false) {
-         ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
-         this.movieTable.put(current[0], currentList);
-       } else {
-         continue;
-       }
+      for (int i = 1; i < current.length; i++) {
+        keySet.add(current[i]);
+      }
+
+      for (String key : keySet) {
+        String currentKey = key;
+
+        if (graph.get(currentKey) != null) {
+          for (String anotherKey : keySet) {
+            if (anotherKey.equals(currentKey) == false) {
+              Boolean contains = false;
+              List<ActorNode> currentList = graph.get(currentKey);
+
+              if (currentList.isEmpty() == false) {
+                for (ActorNode node : currentList) {
+                  if (node.getActor().equals(anotherKey) == true) {
+                    node.getMovies().add(currentTitle);
+                    contains = true;
+                    break;
+                  }
+                }
+
+                if (contains == false) {
+                  ActorNode newNode = new ActorNode(anotherKey);
+                  newNode.getMovies().add(currentTitle);
+                  graph.get(currentKey).add(newNode);
+                }
+              }
+            }
+          }
+        } else {
+          List<ActorNode> newList = new ArrayList<ActorNode>();
+
+          for (String anotherKey : keySet) {
+            if (anotherKey.equals(currentKey) == false) {
+              ActorNode newNode = new ActorNode(anotherKey);
+              newNode.getMovies().add(currentTitle);
+              newList.add(newNode);
+            }
+          }
+          graph.put(currentKey, newList);
+        }
+      }
     }
+
+    // movielines is converted to ArrayList from String List;
+//    ListIterator<String[]> listIterator = this.movielines.listIterator();
+//    while (listIterator.hasNext()) {
+//      String[] current = listIterator.next();
+//      this.newMovielines.add(current);
+//
+//      // Code for Hashtable;
+//      if (current.equals(this.movielines.get(0)) == false) {
+//         ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
+//         this.movieTable.put(current[0], currentList);
+//      } else {
+//         continue;
+//      }
+//    }
 
     // System.out.println(movielines.get(0));
   }	// Constructor
@@ -188,7 +247,7 @@ public class MovieNet {
 
 }
 
-public class ActorNode {
+class ActorNode {
   private String actor;
   private ArrayList<String> movies = new ArrayList<String>();
   private int distance;
@@ -198,11 +257,11 @@ public class ActorNode {
     this.actor = actor;
   }
 
-  public String getActor {
+  public String getActor() {
     return this.actor;
   }
 
-  public ArrayList<String> getMovies {
+  public ArrayList<String> getMovies() {
     return this.movies;
   }
 
