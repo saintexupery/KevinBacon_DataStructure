@@ -71,6 +71,7 @@ public class MovieNet {
   // [Q2]
   public String[] castin(String[] titles) {
     List<String> answerList = new ArrayList<String>();
+    List<String> deleteActors = new ArrayList<String>();
     List<String[]> movieList = new ArrayList<String[]>();
 
     ListIterator<String[]> listIterator = this.movielines.listIterator();
@@ -97,9 +98,27 @@ public class MovieNet {
       answerList.add(movieList.get(0)[i]);
     }
 
-    System.out.println(answerList);
+    // if there is not an actor in the next movies, remove the actor from answerList;
+    for (int i = 1; i < movieList.size(); i++) {
+      for (int j = 0; j < answerList.size(); j++) {
+        if (Arrays.asList(movieList.get(i)).contains(answerList.get(j)) == false) {
+          deleteActors.add(answerList.get(j));
+        }
+      }
 
-    return null;
+      for (int k = 0; k < deleteActors.size(); k++) {
+        answerList.remove(deleteActors.get(k));
+      }
+    }
+
+    // return asnwer with type of String[] or null;
+    if (answerList.size() != 0) {
+      String[] answerArr = new String[answerList.size()];
+      answerArr = answerList.toArray(answerArr);
+      return answerArr;
+    } else {
+      return null;
+    }
   }
 
   // // [Q3]
