@@ -194,17 +194,17 @@ public class MovieNet {
   // [Q3]
   public String[] pairmost(String[] actors) {
 
-    // making combinations with big o of n**2, needs to be modified;
-    ArrayList<String[]> combinations = new ArrayList<String[]>();
-
-    for (int i = 0; i < actors.length; i++) {
-      for (int j = 0; j < actors.length; j++) {
-        if (i != j) {
-          String[] a = {actors[i], actors[j]};
-          combinations.add(a);
-        }
-      }
-    }
+//    // making combinations with big o of n**2, needs to be modified;
+//    ArrayList<String[]> combinations = new ArrayList<String[]>();
+//
+//    for (int i = 0; i < actors.length; i++) {
+//      for (int j = 0; j < actors.length; j++) {
+//        if (i != j) {
+//          String[] a = {actors[i], actors[j]};
+//          combinations.add(a);
+//        }
+//      }
+//    }
 
     // regex instead of using contains;
     // HashMap<String[], Integer> map = new HashMap<String[], Integer>();
@@ -224,6 +224,43 @@ public class MovieNet {
 
    // [Q4]
    public int Bacon(String actor) {
+    String kevin = "Bacon, Kevin";
+
+    // return 0 if input actor is Kevin Bacon himself;
+    // I hope there is no testcase with null actor value;
+    if (actor.equals(kevin) == true) {
+      return 0;
+    } else if (actor == null) {
+      return -1;
+    }
+
+    if (graph.containsKey(actor) == true) {
+      Queue<ActorNode> queue = new LinkedList<ActorNode>();
+      ActorNode currentActor = new ActorNode(actor);
+      currentActor.setDistance(0);
+      queue.add(currentActor);
+      Set<String> alreadyVisit = new HashSet<String>();
+      alreadyVisit.add(actor);
+
+      while (queue.isEmpty() == false) {
+        ActorNode current = queue.remove();
+        String currentActorName = current.getActor();
+
+        if (currentActorName.equals(kevin) == true) {
+          return current.getDistance();
+        } else {
+          for (ActorNode node : graph.get(currentActorName)) {
+            node.setDistance(current.getDistance() + 1);
+            node.setPrevActor(current);
+
+            if (alreadyVisit.contains(node.getActor()) == false) {
+              queue.add(node);
+              alreadyVisit.add(node.getActor());
+            }
+          }
+        }
+      }
+    }
 
     return -1;
    }
@@ -259,6 +296,14 @@ class ActorNode {
 
   public String getActor() {
     return this.actor;
+  }
+
+  public void setDistance(int distance) {
+    this.distance = distance;
+  }
+
+  public int getDistance() {
+    return this.distance;
   }
 
   public ArrayList<String> getMovies() {
