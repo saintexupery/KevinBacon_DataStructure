@@ -75,10 +75,10 @@ public class MainBacon {
 			printStrings(opnd,"? ");
 			printStrings(hollywood.moviesby(opnd),"\n");
 		break;
-	// case 2: System.out.print("Who were cast in all the movie(s): ");
-	// 		printStrings(opnd,"? ");
-	// 		printStrings(hollywood.castin(opnd),"\n");
-	// 	break;
+	case 2: System.out.print("Who were cast in all the movie(s): ");
+			printStrings(opnd,"? ");
+			printStrings(hollywood.castin(opnd),"\n");
+		break;
 	// case 3: System.out.print("Which pair cast in "+opnd[0]
 	// 		+" costarred most often? ");
 	// 		String[] actors = hollywood.castin(opnd);
