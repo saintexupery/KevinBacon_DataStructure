@@ -14,6 +14,7 @@ public class MovieNet {
 
   protected LinkedList<String[]> movielines;
   protected List<String[]> newMovielines;
+  // protected HashMap<String, ArrayList<String>> movieMap;
 
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
@@ -21,11 +22,22 @@ public class MovieNet {
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
     this.newMovielines = new ArrayList<String[]>();
+    // this.movieMap = new HashMap<String, ArrayList<String>>();
 
     // movielines is converted to ArrayList from String List;
     ListIterator<String[]> listIterator = this.movielines.listIterator();
     while (listIterator.hasNext()) {
-      newMovielines.add(listIterator.next());
+      String[] current = listIterator.next();
+      newMovielines.add(current);
+
+      // if (current.equals(this.movielines.get(0)) == false) {
+      //   ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
+      //   // System.out.println("class: " + current[0].getClass().getSimpleName());
+      //   // System.out.println("current value: " + current[0]);
+      //   movieMap.put(current[0], );
+      // } else {
+      //   continue;
+      // }
     }
 
     // System.out.println(movielines.get(0));
@@ -123,7 +135,12 @@ public class MovieNet {
 
   // [Q3]
   public String[] pairmost(String[] actors) {
-    System.out.println(actors);
+    for (int i = 0; i < actors.length; i++) {
+      System.out.println(actors[i]);
+    }
+
+
+    return null;
   }
   //
   // // [Q4]
