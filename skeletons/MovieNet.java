@@ -135,9 +135,21 @@ public class MovieNet {
 
   // [Q3]
   public String[] pairmost(String[] actors) {
+
+    // making combinations with big o of n**2, needs to be modified;
+    ArrayList<String> combinations = new ArrayList<String>();
+
     for (int i = 0; i < actors.length; i++) {
-      System.out.println(actors[i]);
+      for (int j = 0; j < actors.length; j++) {
+        if (i != j) {
+          combinations.add(actors[i] + "|" + actors[j]);
+        }
+      }
     }
+
+    
+
+
 
 
     return null;
