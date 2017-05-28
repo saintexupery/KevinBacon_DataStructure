@@ -13,12 +13,21 @@ public class MovieNet {
   static final String KevinBacon = "Bacon, Kevin";
 
   protected LinkedList<String[]> movielines;
+  protected List<String[]> newMovielines;
 
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
   //	String[1..n-1] = list of actors
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
+    this.newMovielines = new ArrayList<String[]>();
+
+    // movielines is converted to ArrayList from String List;
+    ListIterator<String[]> listIterator = this.movielines.listIterator();
+    while (listIterator.hasNext()) {
+      newMovielines.add(listIterator.next());
+    }
+
     // System.out.println(movielines.get(0));
   }	// Constructor
 
@@ -76,12 +85,14 @@ public class MovieNet {
       String[] current = listIterator.next();
 
       for (int i = 0; i < titles.length; i++) {
-        if (current[0] == titles[i]) {
+        if (current[0].equals(titles[i])) {
           movieList.add(current);
           break;
         }
       }
     }
+
+    
 
 
     return null;
