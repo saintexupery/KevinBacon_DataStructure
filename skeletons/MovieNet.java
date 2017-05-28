@@ -15,6 +15,7 @@ public class MovieNet {
   protected LinkedList<String[]> movielines;
   protected List<String[]> newMovielines;
   protected Hashtable<String, ArrayList<String>> movieTable;
+  protected Map<String, List<ActorNode>> graph;
 
   // Each instance of movielines is String[] such that
   //	String[0] = title of movie
@@ -188,28 +189,28 @@ public class MovieNet {
 }
 
 public class ActorNode {
-  private String name;
+  private String actor;
   private ArrayList<String> movies = new ArrayList<String>();
   private int distance;
-  private ActorNode prev = null;
+  private ActorNode prevActor = null;
 
-  public ActorNode(String name) {
-    this.name = name;
+  public ActorNode(String actor) {
+    this.actor = actor;
   }
 
-  public String getName {
-    return this.name;
+  public String getActor {
+    return this.actor;
   }
 
   public ArrayList<String> getMovies {
     return this.movies;
   }
 
-  public void setPrev(ActorNode node) {
-    this.prev = node;
+  public void setPrevActor(ActorNode node) {
+    this.prevActor = node;
   }
 
-  public ActorNode getPrev() {
-    return this.prev;
+  public ActorNode getPrevActor() {
+    return this.prevActor;
   }
 }
