@@ -137,21 +137,39 @@ public class MovieNet {
   public String[] pairmost(String[] actors) {
 
     // making combinations with big o of n**2, needs to be modified;
-    ArrayList<String> combinations = new ArrayList<String>();
+    ArrayList<String[]> combinations = new ArrayList<String[]>();
 
     for (int i = 0; i < actors.length; i++) {
       for (int j = 0; j < actors.length; j++) {
         if (i != j) {
-          combinations.add(actors[i] + "|" + actors[j]);
+          String[] a = {actors[i], actors[j]};
+          combinations.add(a);
         }
       }
     }
 
-    
+    // regex instead of using contains;
+    // HashMap<String[], Integer> map = new HashMap<String[], Integer>();
 
+    for (int i = 0; i < combinations.size(); i++) {
+      // Integer key = 0;
 
-
-
+      for (String[] movie : this.movielines) {
+        if (Arrays.asList(movie).contains(combinations.get(i)[0]) == true) {
+          // key += 1;
+          System.out.println("Yes!!");
+        }
+        // Pattern p = Pattern.compile(combinations.get(i));
+        // boolean found = false;
+        // for (String s : this.newMovielines.get(j)) {
+        //   if (p.matcher(s).find()) {
+        //     found = true;
+        //     break;
+        //   }
+        // }
+        // System.out.println(movie);
+      }
+    }
     return null;
   }
   //
