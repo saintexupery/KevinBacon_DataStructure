@@ -186,3 +186,30 @@ public class MovieNet {
 /*============================================================================*/
 
 }
+
+public class ActorNode {
+  private String name;
+  private ArrayList<String> movies = new ArrayList<String>();
+  private int distance;
+  private ActorNode prev = null;
+
+  public ActorNode(String name) {
+    this.name = name;
+  }
+
+  public String getName {
+    return this.name;
+  }
+
+  public ArrayList<String> getMovies {
+    return this.movies;
+  }
+
+  public void setPrev(ActorNode node) {
+    this.prev = node;
+  }
+
+  public ActorNode getPrev() {
+    return this.prev;
+  }
+}
