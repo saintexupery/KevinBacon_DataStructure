@@ -71,20 +71,20 @@ public class MainBacon {
 
 	/* Query Types */
 	switch(Integer.parseInt(op)) {
-	case 1: System.out.print("Which movies were starred by ");
-			printStrings(opnd,"? ");
-			printStrings(hollywood.moviesby(opnd),"\n");
-		break;
-	case 2: System.out.print("Who were cast in all the movie(s): ");
-			printStrings(opnd,"? ");
-			printStrings(hollywood.castin(opnd),"\n");
-		break;
-	// case 3: System.out.print("Which pair cast in "+opnd[0]
-	// 		+" costarred most often? ");
-	// 		String[] actors = hollywood.castin(opnd);
-	// 		if (actors==null) actors = new String[0];
-	// 		printStrings(hollywood.pairmost(actors),"\n");
+	// case 1: System.out.print("Which movies were starred by ");
+	// 		printStrings(opnd,"? ");
+	// 		printStrings(hollywood.moviesby(opnd),"\n");
 	// 	break;
+	// case 2: System.out.print("Who were cast in all the movie(s): ");
+	// 		printStrings(opnd,"? ");
+	// 		printStrings(hollywood.castin(opnd),"\n");
+	// 	break;
+	case 3: System.out.print("Which pair cast in "+opnd[0]
+			+" costarred most often? ");
+			String[] actors = hollywood.castin(opnd);
+			if (actors==null) actors = new String[0];
+			printStrings(hollywood.pairmost(actors),"\n");
+		break;
   //
 	// case 4: System.out.println("Bacon number of "+opnd[0]+" : "
 	// 		+hollywood.Bacon(opnd[0]));
