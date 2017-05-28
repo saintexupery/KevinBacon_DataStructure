@@ -60,7 +60,32 @@ public class MovieNet {
   }
 
   // [Q2]
-  public String[] castin(String[] titles) { }
+  public String[] castin(String[] titles) {
+    List<String> answerList = new ArrayList<String>();
+    List<String[]> movieList = new ArrayList<String[]>();
+
+    ListIterator<String[]> listIterator = this.movielines.listIterator();
+
+    // case of that input is null;
+    if (titles.length == 0) {
+      return null;
+    }
+
+    // add titles with actors to movieList;
+    while (listIterator.hasNext()) {
+      String[] current = listIterator.next();
+
+      for (int i = 0; i < titles.length; i++) {
+        if (current[0] == titles[i]) {
+          movieList.add(current);
+          break;
+        }
+      }
+    }
+
+
+    return null;
+  }
 
   // // [Q3]
   // public String[] pairmost(String[] actors) { }
