@@ -81,6 +81,7 @@ public class MovieNet {
           graph.put(currentKey, newList);
         }
       }
+      keySet.clear();
     }
 
     // movielines is converted to ArrayList from String List;
@@ -224,11 +225,9 @@ public class MovieNet {
 
    // [Q4]
    public int Bacon(String actor) {
-    String kevin = "Bacon, Kevin";
-
     // return 0 if input actor is Kevin Bacon himself;
     // I hope there is no testcase with null actor value;
-    if (actor.equals(kevin) == true) {
+    if (actor.equals(KevinBacon) == true) {
       return 0;
     } else if (actor == null) {
       return -1;
@@ -246,7 +245,7 @@ public class MovieNet {
         ActorNode current = queue.remove();
         String currentActorName = current.getActor();
 
-        if (currentActorName.equals(kevin) == true) {
+        if (currentActorName.equals(KevinBacon) == true) {
           return current.getDistance();
         } else {
           for (ActorNode node : graph.get(currentActorName)) {
