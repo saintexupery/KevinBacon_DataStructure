@@ -278,18 +278,68 @@ public class MovieNet {
    }
 
    // [Q6]
-   public int npath(String src, String dst) {
-    return 0;
-   }
+  public int npath(String src, String dst) {
+    int distance = distance(src, dst);
 
-  // // [Q7]
-  // public String[] apath(String src, String dst) { }
-  //
-  // // [Q8]
-  // public int eccentricity(String actor) { }
-  //
-  // // [Q9]
-  // public float closeness(String actor) { }
+    if (distance == 0 || distance == 1) {
+      return 1;
+    }
+
+    List<ActorNode> source = this.graph.get(src);
+    ArrayList<ActorNode> level1 = new ArrayList<ActorNode>(source);
+    ArrayList<String> alreadyVisit = new ArrayList<String>();
+    ArrayList<ArrayList<ActorNode>> distanceArray = new ArrayList<ArrayList<ActorNode>>();
+    distanceArray.add(level1);
+
+    for (ActorNode actor : level1) {
+      alreadyVisit.add(actor.getActor());
+    }
+
+
+    for (int i = 0; i < distance - 1; i++) {
+      ArrayList<ActorNode> current = distanceArray.get(i);
+      ArrayList<ActorNode> nextDistance = nextLevel(current, alreadyVisit);
+      distanceArray.add(nextDistance);
+
+      for (ActorNode node : nextDistance) {
+        alreadyVisit.add(node.getActor());
+      }
+
+      System.out.println("size: " + alreadyVisit.size());
+    }
+
+
+
+    return 0;
+  }
+
+  public ArrayList<ActorNode> nextLevel(ArrayList<ActorNode> prevLevel, ArrayList<String> alreadyVisit) {
+    ArrayList<ActorNode> nextLevel = new ArrayList<ActorNode>();
+
+    for (ActorNode node : prevLevel) {
+      List<ActorNode> current = this.graph.get(node.getActor());
+
+      for (ActorNode nodeInList : current) {
+        if (alreadyVisit.contains(nodeInList.getActor()) == false) {
+          nextLevel.add(nodeInList);
+        }
+      }
+    }
+
+    System.out.println("nextLevel: " + nextLevel.size());
+    return nextLevel;
+  }
+
+  // [Q7]
+//  public String[] apath(String src, String dst) {
+//
+//  }
+
+//  // [Q8]
+//  public int eccentricity(String actor) { }
+//
+//  // [Q9]
+//  public float closeness(String actor) { }
 
 /*============================================================================*/
 
