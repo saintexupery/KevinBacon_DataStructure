@@ -13,8 +13,6 @@ public class MovieNet {
   static final String KevinBacon = "Bacon, Kevin";
 
   protected LinkedList<String[]> movielines;
-//  protected List<String[]> newMovielines;
-//  protected Hashtable<String, ArrayList<String>> movieTable;
 
   // With node;
   protected Map<String, List<ActorNode>> graph;
@@ -25,8 +23,6 @@ public class MovieNet {
   //	String[1..n-1] = list of actors
   public MovieNet(LinkedList<String[]> movielines) {
     this.movielines = movielines;
-//    this.newMovielines = new ArrayList<String[]>();
-//    this.movieTable = new Hashtable<String, ArrayList<String>>();
 
     //With node;
     this.graph = new HashMap<String, List<ActorNode>>();
@@ -83,23 +79,6 @@ public class MovieNet {
       }
       keySet.clear();
     }
-
-    // movielines is converted to ArrayList from String List;
-//    ListIterator<String[]> listIterator = this.movielines.listIterator();
-//    while (listIterator.hasNext()) {
-//      String[] current = listIterator.next();
-//      this.newMovielines.add(current);
-//
-//      // Code for Hashtable;
-//      if (current.equals(this.movielines.get(0)) == false) {
-//         ArrayList<String> currentList = new ArrayList<String>(Arrays.asList(current));
-//         this.movieTable.put(current[0], currentList);
-//      } else {
-//         continue;
-//      }
-//    }
-
-    // System.out.println(movielines.get(0));
   }	// Constructor
 
 /*============================================================================*/
@@ -120,8 +99,6 @@ public class MovieNet {
         }
 
         if (j == actors.length - 1 && check == actors.length) {
-          // System.out.println(this.movielines.get(i)[0]);
-          // answer[i] = this.movielines.get(i)[0];
           answerList.add(this.movielines.get(i)[0]);
         }
       }
@@ -195,31 +172,21 @@ public class MovieNet {
   // [Q3]
   public String[] pairmost(String[] actors) {
 
-//    // making combinations with big o of n**2, needs to be modified;
-//    ArrayList<String[]> combinations = new ArrayList<String[]>();
-//
-//    for (int i = 0; i < actors.length; i++) {
-//      for (int j = 0; j < actors.length; j++) {
-//        if (i != j) {
-//          String[] a = {actors[i], actors[j]};
-//          combinations.add(a);
-//        }
-//      }
-//    }
+    // making combinations with big o of n**2, needs to be modified;
+    ArrayList<String[]> combinations = new ArrayList<String[]>();
 
-    // regex instead of using contains;
-    // HashMap<String[], Integer> map = new HashMap<String[], Integer>();
+    for (int i = 0; i < actors.length; i++) {
+      for (int j = 0; j < actors.length; j++) {
+        if (i != j) {
+          String[] a = {actors[i], actors[j]};
+          combinations.add(a);
+        }
+      }
+    }
 
-//    for (int i = 0; i < combinations.size(); i++) {
-//      // Integer key = 0;
-//
-//      for (String[] movie : this.movielines) {
-//        if (Arrays.asList(movie).contains(combinations.get(i)[0]) == true && Arrays.asList(movie).contains(combinations.get(i)[1]) == true) {
-//          // key += 1;
-//          System.out.println("Yes!!");
-//        }
-//      }
-//    }
+    // checking algorithm by applying ActorNode instead of using regex;
+
+
     return null;
   }
 
