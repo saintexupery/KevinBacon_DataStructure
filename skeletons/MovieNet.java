@@ -204,7 +204,7 @@ public class MovieNet {
     // I hope there is no testcase with null actor value;
     if (actor.equals(KevinBacon) == true) {
       return 0;
-    } else if (actor == null) {
+    } else if (actor == null | graph.containsKey(actor) == false) {
       return -1;
     }
 
@@ -241,6 +241,11 @@ public class MovieNet {
   //
    // [Q5]
    public int distance(String src, String dst) {
+     // exactly same as bacon function
+     if (src == null | graph.containsKey(src) == false | dst == null | graph.containsKey(dst) == false) {
+       return -1;
+     }
+
      if (graph.containsKey(src) == true) {
        Queue<ActorNode> queue = new LinkedList<ActorNode>();
        ActorNode currentActor = new ActorNode(src);
@@ -272,9 +277,11 @@ public class MovieNet {
      return -1;
    }
 
-  // // [Q6]
-  // public int npath(String src, String dst) { }
-  //
+   // [Q6]
+   public int npath(String src, String dst) {
+    return 0;
+   }
+
   // // [Q7]
   // public String[] apath(String src, String dst) { }
   //
