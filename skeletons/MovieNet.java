@@ -239,9 +239,39 @@ public class MovieNet {
     return -1;
    }
   //
-  // // [Q5]
-  // public int distance(String src, String dst) { }
-  //
+   // [Q5]
+   public int distance(String src, String dst) {
+     if (graph.containsKey(src) == true) {
+       Queue<ActorNode> queue = new LinkedList<ActorNode>();
+       ActorNode currentActor = new ActorNode(src);
+       currentActor.setDistance(0);
+       queue.add(currentActor);
+       Set<String> alreadyVisit = new HashSet<String>();
+       alreadyVisit.add(src);
+
+       while (queue.isEmpty() == false) {
+         ActorNode current = queue.remove();
+         String currentActorName = current.getActor();
+
+         if (currentActorName.equals(dst) == true) {
+           return current.getDistance();
+         } else {
+           for (ActorNode node : graph.get(currentActorName)) {
+             node.setDistance(current.getDistance() + 1);
+             node.setPrevActor(current);
+
+             if (alreadyVisit.contains(node.getActor()) == false) {
+               queue.add(node);
+               alreadyVisit.add(node.getActor());
+             }
+           }
+         }
+       }
+     }
+
+     return -1;
+   }
+
   // // [Q6]
   // public int npath(String src, String dst) { }
   //
