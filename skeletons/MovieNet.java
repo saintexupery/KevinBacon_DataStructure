@@ -171,23 +171,27 @@ public class MovieNet {
 
   // [Q3]
   public String[] pairmost(String[] actors) {
+    String[] answerList = new String[2];
+    List<ActorNode> actorsNodes = new ArrayList<ActorNode>();
+    int max = 0;
 
-    // making combinations with big o of n**2, needs to be modified;
-    ArrayList<String[]> combinations = new ArrayList<String[]>();
-
-    for (int i = 0; i < actors.length; i++) {
-      for (int j = 0; j < actors.length; j++) {
-        if (i != j) {
-          String[] a = {actors[i], actors[j]};
-          combinations.add(a);
+    for (String actor : actors) {
+      List<ActorNode> collaborateList = this.graph.get(actor);
+      for(ActorNode node : collaborateList) {
+        if (Arrays.asList(actors).contains(node.getActor()) == true && node.getMovies().size() > max) {
+          max = node.getMovies().size();
+          answerList[0] = actor;
+          answerList[1] = node.getActor();
         }
       }
     }
 
-    // checking algorithm by applying ActorNode instead of using regex;
-
-
-    return null;
+    // return asnwer with type of String[] or null;
+    if (max != 0) {
+      return answerList;
+    } else {
+      return null;
+    }
   }
 
    // [Q4]
