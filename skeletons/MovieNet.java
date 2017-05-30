@@ -330,56 +330,54 @@ public class MovieNet {
       // reconstruct distanceSet;
       int numberOfPath = 0;
 
-      for (int i = distance - 1; i > 0; i--) {
+      for (int i = distance - 1; i >= 0; i--) {
         if (i == distance - 1) {
           for (ActorNode a : graph.get(dst)) {
             for (ActorNode b : distanceSet.get(i)) {
               if (a.getActor().equals(b.getActor()) == true) {
                 b.setValue(1);
 
-                if (distance == 2) {
+                if (i == 1) {
                   numberOfPath += 1;
                 }
                 break;
               }
             }
           }
-          return numberOfPath;
-        } else if(i == 1) {
-          for (ActorNode h : graph.get(src)) {
-            for (ActorNode f : distanceSet.get(i)) {
-              if (f.getValue() != 0 && f.getActor().equals(h.getActor()) == true) {
-                numberOfPath += f.getValue();
-                break;
+        } else if(i == 0) {
+          if (distance == 2) {
+            return numberOfPath;
+          } else {
+            for (ActorNode h : distanceSet.get(i+1)) {
+              for (ActorNode f : graph.get(src)) {
+                if (h.getValue() != 0) {
+                  numberOfPath += h.getValue();
+                  break;
+                }
               }
             }
+            return numberOfPath;
           }
         } else {
-          for (ActorNode c : distanceSet.get(i+1)) {
-            for (ActorNode d : distanceSet.get(i)) {
-              if (c.getValue() != 0 && c.getActor().equals(d.getActor()) == true) {
-                int e = c.getValue() + 1;
-                d.setValue(e);
-                break;
+          for (ActorNode c : distanceSet.get(i + 1)) {
+            if (c.getValue() != 0) {
+              for (ActorNode d : graph.get(c.getActor())) {
+                for (ActorNode e : distanceSet.get(i)) {
+                  if (e.getActor().equals(d.getActor()) == true) {
+                    int k = e.getValue() + c.getValue();
+                    e.setValue(k);
+                  }
+                }
               }
             }
           }
         }
+
       }
 
       return numberOfPath;
-
-
-      // test from dst to distance -1 succeed
-//      for (ActorNode a : graph.get(dst)) {
-//        for (ActorNode b : distanceSet.get(distance - 1)) {
-//          if (a.getActor().equals(b.getActor()) == true) {
-//            System.out.println("distanceSet: " + b.getActor());
-//          }
-//        }
-//      }
-
     } // if clause has been finished here;
+
     return 0;
   }
 
