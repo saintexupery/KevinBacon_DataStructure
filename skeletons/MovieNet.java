@@ -382,9 +382,83 @@ public class MovieNet {
   }
 
   // [Q7]
-//  public String[] apath(String src, String dst) {
-//
-//  }
+  public String[] apath(String src, String dst) {
+    int distance = distance(src, dst);
+    Map<Integer, ArrayList<ActorNode>> distanceSet = new HashMap<Integer, ArrayList<ActorNode>>();
+
+    // Think about the case of src == dst;
+
+
+    // Case that nodes are not reachable to each other;
+    if (distance == 0) {
+      return null;
+    }
+
+    // case that nodes are fringes to each other;
+    if (distance == 1) {
+      String[] answer = new String[2];
+      answer[0] = src;
+      answer[1] = dst;
+      return answer;
+    }
+
+    if (graph.containsKey(src) == true) {
+      Queue<ActorNode> queue = new LinkedList<ActorNode>();
+      ActorNode currentActor = new ActorNode(src);
+      currentActor.setDistance(0);
+      queue.add(currentActor);
+      Set<String> alreadyVisit = new HashSet<String>();
+      alreadyVisit.add(src);
+      ArrayList<String> answerList = new ArrayList<String>();
+
+
+      // queue starts from here;
+      while (queue.isEmpty() == false) {
+        ActorNode current = queue.remove();
+        String currentActorName = current.getActor();
+
+        for (ActorNode node : graph.get(currentActorName)) {
+          if (alreadyVisit.contains(node.getActor()) == false) {
+            node.setDistance(current.getDistance() + 1);
+            node.setPrevActor(current);
+            queue.add(node);
+            alreadyVisit.add(node.getActor());
+
+            // put key, value to distanceSet
+            ArrayList<ActorNode> currentList = null;
+            if (distanceSet.containsKey(node.getDistance())) {
+              currentList = distanceSet.get(node.getDistance());
+
+              if (currentList == null) {
+                currentList = new ArrayList<ActorNode>();
+              }
+
+              currentList.add(node);
+            } else {
+              currentList = new ArrayList<ActorNode>();
+              currentList.add(node);
+            }
+
+            distanceSet.put(node.getDistance(), currentList);
+          }
+        }
+      } // queue has been finished here;
+
+
+      answerList.add(src);
+      for (int i = 1; i < distance; i++) {
+        answerList.add(distanceSet.get(i).get(0).getActor());
+      }
+      answerList.add(dst);
+
+      String[] answerArr = new String[answerList.size()];
+      answerArr = answerList.toArray(answerArr);
+      return answerArr;
+
+    } // if clause has been finished here;
+    
+    return null;
+  }
 
 //  // [Q8]
 //  public int eccentricity(String actor) { }
