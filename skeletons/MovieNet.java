@@ -378,6 +378,7 @@ class ActorNode {
   private ArrayList<String> movies = new ArrayList<String>();
   private int distance;
   private ActorNode prevActor = null;
+  private int value = 0;
 
   public ActorNode(String actor) {
     this.actor = actor;
@@ -405,5 +406,13 @@ class ActorNode {
 
   public ActorNode getPrevActor() {
     return this.prevActor;
+  }
+
+  public void setValue(int value) {
+    this.value = value;
+  }
+
+  public int getValue() {
+    return this.value;
   }
 }
