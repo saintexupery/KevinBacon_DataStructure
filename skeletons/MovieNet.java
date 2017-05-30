@@ -519,8 +519,62 @@ public class MovieNet {
     return 0;
   }
 
-//  // [Q9]
-//  public float closeness(String actor) { }
+  // [Q9]
+  public float closeness(String actor) {
+    Map<Integer, ArrayList<ActorNode>> distanceSet = new HashMap<Integer, ArrayList<ActorNode>>();
+
+    if (graph.containsKey(actor) == true) {
+      Queue<ActorNode> queue = new LinkedList<ActorNode>();
+      ActorNode currentActor = new ActorNode(actor);
+      currentActor.setDistance(0);
+      queue.add(currentActor);
+      Set<String> alreadyVisit = new HashSet<String>();
+      alreadyVisit.add(actor);
+      float answer = 0;
+
+
+      // queue starts from here;
+      while (queue.isEmpty() == false) {
+        ActorNode current = queue.remove();
+        String currentActorName = current.getActor();
+
+        for (ActorNode node : graph.get(currentActorName)) {
+          if (alreadyVisit.contains(node.getActor()) == false) {
+            node.setDistance(current.getDistance() + 1);
+            node.setPrevActor(current);
+            queue.add(node);
+            alreadyVisit.add(node.getActor());
+
+            // put key, value to distanceSet
+            ArrayList<ActorNode> currentList = null;
+            if (distanceSet.containsKey(node.getDistance())) {
+              currentList = distanceSet.get(node.getDistance());
+
+              if (currentList == null) {
+                currentList = new ArrayList<ActorNode>();
+              }
+
+              currentList.add(node);
+            } else {
+              currentList = new ArrayList<ActorNode>();
+              currentList.add(node);
+            }
+
+            distanceSet.put(node.getDistance(), currentList);
+          }
+        }
+      } // queue has been finished here;
+
+      for (Integer key : distanceSet.keySet()) {
+        answer += distanceSet.get(key).size() / Math.pow(2, key);
+      }
+
+      return answer;
+
+    } // if clause has been finished here;
+
+    return 0;
+  }
 
 /*============================================================================*/
 
