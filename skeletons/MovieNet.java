@@ -280,54 +280,64 @@ public class MovieNet {
    // [Q6]
   public int npath(String src, String dst) {
     int distance = distance(src, dst);
+    Map<Integer, ArrayList<ActorNode>> distanceSet = new HashMap<Integer, ArrayList<ActorNode>>();
 
     if (distance == 0 || distance == 1) {
       return 1;
     }
 
-    List<ActorNode> source = this.graph.get(src);
-    ArrayList<ActorNode> level1 = new ArrayList<ActorNode>(source);
-    ArrayList<String> alreadyVisit = new ArrayList<String>();
-    ArrayList<ArrayList<ActorNode>> distanceArray = new ArrayList<ArrayList<ActorNode>>();
-    distanceArray.add(level1);
+    if (graph.containsKey(src) == true) {
+      Queue<ActorNode> queue = new LinkedList<ActorNode>();
+      ActorNode currentActor = new ActorNode(src);
+      currentActor.setDistance(0);
+      queue.add(currentActor);
+      Set<String> alreadyVisit = new HashSet<String>();
+      alreadyVisit.add(src);
 
-    for (ActorNode actor : level1) {
-      alreadyVisit.add(actor.getActor());
-    }
+      while (queue.isEmpty() == false) {
+        ActorNode current = queue.remove();
+        String currentActorName = current.getActor();
 
+        for (ActorNode node : graph.get(currentActorName)) {
+          if (alreadyVisit.contains(node.getActor()) == false) {
+            node.setDistance(current.getDistance() + 1);
+            node.setPrevActor(current);
+            queue.add(node);
+            alreadyVisit.add(node.getActor());
 
-    for (int i = 0; i < distance - 1; i++) {
-      ArrayList<ActorNode> current = distanceArray.get(i);
-      ArrayList<ActorNode> nextDistance = nextLevel(current, alreadyVisit);
-      distanceArray.add(nextDistance);
+            System.out.println("already: " + node.getActor() + ", " + node.getDistance());
+            System.out.println("check: " + alreadyVisit.contains(node.getActor()));
 
-      for (ActorNode node : nextDistance) {
-        alreadyVisit.add(node.getActor());
-      }
+            // put key, value to distanceSet
+            ArrayList<ActorNode> currentList = null;
+            if (distanceSet.containsKey(node.getDistance())) {
+              currentList = distanceSet.get(node.getDistance());
 
-      System.out.println("size: " + alreadyVisit.size());
-    }
+              if (currentList == null) {
+                currentList = new ArrayList<ActorNode>();
+              }
 
+              currentList.add(node);
+            } else {
+              currentList = new ArrayList<ActorNode>();
+              currentList.add(node);
+            }
 
-
-    return 0;
-  }
-
-  public ArrayList<ActorNode> nextLevel(ArrayList<ActorNode> prevLevel, ArrayList<String> alreadyVisit) {
-    ArrayList<ActorNode> nextLevel = new ArrayList<ActorNode>();
-
-    for (ActorNode node : prevLevel) {
-      List<ActorNode> current = this.graph.get(node.getActor());
-
-      for (ActorNode nodeInList : current) {
-        if (alreadyVisit.contains(nodeInList.getActor()) == false) {
-          nextLevel.add(nodeInList);
+            distanceSet.put(node.getDistance(), currentList);
+          }
         }
       }
     }
 
-    System.out.println("nextLevel: " + nextLevel.size());
-    return nextLevel;
+//    for (int i = 1; i < distance + 1; i++) {
+//      if (distanceSet.get(i) != null) {
+//        for (ActorNode node : distanceSet.get(i)) {
+//          System.out.println("key: " + i + ", distance: " + node.getDistance());
+//        }
+//      }
+//    }
+
+    return 0;
   }
 
   // [Q7]
