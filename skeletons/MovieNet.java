@@ -327,34 +327,59 @@ public class MovieNet {
         }
       } // queue has been finished here;
 
+      // reconstruct distanceSet;
+      int numberOfPath = 0;
 
-      for (ActorNode a : graph.get(dst)) {
-        for (ActorNode b : distanceSet.get(distance - 1)) {
-          if (a.getActor().equals(b.getActor()) == true) {
-            System.out.println("distanceSet: " + b.getActor());
+      for (int i = distance - 1; i > 0; i--) {
+        if (i == distance - 1) {
+          for (ActorNode a : graph.get(dst)) {
+            for (ActorNode b : distanceSet.get(i)) {
+              if (a.getActor().equals(b.getActor()) == true) {
+                b.setValue(1);
+
+                if (distance == 2) {
+                  numberOfPath += 1;
+                }
+                break;
+              }
+            }
+          }
+          return numberOfPath;
+        } else if(i == 1) {
+          for (ActorNode h : graph.get(src)) {
+            for (ActorNode f : distanceSet.get(i)) {
+              if (f.getValue() != 0 && f.getActor().equals(h.getActor()) == true) {
+                numberOfPath += f.getValue();
+                break;
+              }
+            }
+          }
+        } else {
+          for (ActorNode c : distanceSet.get(i+1)) {
+            for (ActorNode d : distanceSet.get(i)) {
+              if (c.getValue() != 0 && c.getActor().equals(d.getActor()) == true) {
+                int e = c.getValue() + 1;
+                d.setValue(e);
+                break;
+              }
+            }
           }
         }
       }
 
+      return numberOfPath;
 
 
-
-      // reconstruct distanceSet;
-//      for (int i = distance - 1; i > 0; i--) {
-//
+      // test from dst to distance -1 succeed
+//      for (ActorNode a : graph.get(dst)) {
+//        for (ActorNode b : distanceSet.get(distance - 1)) {
+//          if (a.getActor().equals(b.getActor()) == true) {
+//            System.out.println("distanceSet: " + b.getActor());
+//          }
+//        }
 //      }
 
     } // if clause has been finished here;
-
-//
-//    for (int i = 1; i < distance + 1; i++) {
-//      if (distanceSet.get(i) != null) {
-//        for (ActorNode node : distanceSet.get(i)) {
-//          System.out.println("key: " + node.getActor() + ", distance: " + node.getDistance());
-//        }
-//      }
-//    }
-
     return 0;
   }
 
