@@ -294,6 +294,8 @@ public class MovieNet {
       Set<String> alreadyVisit = new HashSet<String>();
       alreadyVisit.add(src);
 
+
+      // queue starts from here;
       while (queue.isEmpty() == false) {
         ActorNode current = queue.remove();
         String currentActorName = current.getActor();
@@ -304,9 +306,6 @@ public class MovieNet {
             node.setPrevActor(current);
             queue.add(node);
             alreadyVisit.add(node.getActor());
-
-            System.out.println("already: " + node.getActor() + ", " + node.getDistance());
-            System.out.println("check: " + alreadyVisit.contains(node.getActor()));
 
             // put key, value to distanceSet
             ArrayList<ActorNode> currentList = null;
@@ -326,13 +325,32 @@ public class MovieNet {
             distanceSet.put(node.getDistance(), currentList);
           }
         }
-      }
-    }
+      } // queue has been finished here;
 
+
+      for (ActorNode a : graph.get(dst)) {
+        for (ActorNode b : distanceSet.get(distance - 1)) {
+          if (a.getActor().equals(b.getActor()) == true) {
+            System.out.println("distanceSet: " + b.getActor());
+          }
+        }
+      }
+
+
+
+
+      // reconstruct distanceSet;
+//      for (int i = distance - 1; i > 0; i--) {
+//
+//      }
+
+    } // if clause has been finished here;
+
+//
 //    for (int i = 1; i < distance + 1; i++) {
 //      if (distanceSet.get(i) != null) {
 //        for (ActorNode node : distanceSet.get(i)) {
-//          System.out.println("key: " + i + ", distance: " + node.getDistance());
+//          System.out.println("key: " + node.getActor() + ", distance: " + node.getDistance());
 //        }
 //      }
 //    }
